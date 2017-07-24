@@ -1,0 +1,5 @@
+<resources>
+  <dimen name="fab_margin_vertical">16dp</dimen>
+  <dimen name="fab_margin_horizontal">32dp</dimen>
+  <dimen name="chat_box_margin">16dp</dimen>
+</resources>
