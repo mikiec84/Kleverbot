@@ -1,4 +1,7 @@
-package com.om.kleverbot
+package com.om.kleverbot.repository
+
+import com.om.kleverbot.api.BotResponse
+import com.om.kleverbot.api.ApiService
 
 class Repository(val apiService: ApiService) {
 
