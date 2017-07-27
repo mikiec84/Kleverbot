@@ -1,24 +1,21 @@
-package com.om.kleverbot.ui
+package com.om.kleverbot.ui.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ScrollView
 import com.om.kleverbot.R
-import com.om.kleverbot.repository.ProvideRepository
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import com.om.kleverbot.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.message_layout.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
 
   lateinit var replyView: View
-  val compositeDisposable: CompositeDisposable = CompositeDisposable()
+
+  override var presenter: MainContract.Presenter = MainPresenter()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -26,30 +23,13 @@ class MainActivity : AppCompatActivity() {
 
     setSupportActionBar(toolbar)
 
-    val repository = ProvideRepository.provideRepository()
-
     fab.setOnClickListener {
       addMessageToView(messageET.text.toString())
 
-      compositeDisposable.add(
-          repository.talkToBot("CC3enJ_PpO4o01bcYzIWb3Q8zYA", messageET.text.toString())
-              .observeOn(AndroidSchedulers.mainThread())
-              .subscribeOn(Schedulers.io())
-              .subscribe({
-                result ->
-                addMessageToView(result.output)
-              }, { error ->
-                error.printStackTrace()
-              })
-      )
+      presenter.talkToBot(messageET.text.toString())
 
       messageET.setText("")
     }
-  }
-
-  override fun onDestroy() {
-    compositeDisposable.clear()
-    super.onDestroy()
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -67,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     return super.onOptionsItemSelected(item)
   }
 
-  fun addMessageToView(message: String) {
+  override fun addMessageToView(message: String) {
     replyView = layoutInflater.inflate(R.layout.message_layout, null)
     replyView.messageContentTV.text = message
     messagesLayout.addView(replyView)
