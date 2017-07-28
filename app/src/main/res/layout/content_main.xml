@@ -13,28 +13,15 @@
   <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:layout_marginBottom="15dp"
       >
-
-    <!--<ScrollView-->
-    <!--android:id="@+id/messagesScrollContainer"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_above="@+id/messageET"-->
-    <!--android:orientation="vertical"-->
-    <!--&gt;-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/messagesLayout"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical"-->
-    <!--/>-->
-    <!--</ScrollView>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/messagesRecycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/messageET"
+        app:stackFromEnd="true"
         />
 
     <EditText
@@ -43,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/chat_box_margin"
+        android:background="@drawable/your_messages_bg"
         android:hint="Type a message"
         />
 

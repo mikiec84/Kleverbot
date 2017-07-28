@@ -32,22 +32,24 @@ class MainActivity : AppCompatActivity() {
 
     setupMessagesRecycler()
 
-    sendMessageBTN.setOnClickListener {
-      addMessage(messageET.text.toString(), "You", "Kleverbot")
+    compositeDisposable.add(
+        ApiManager.talkToBot(messageET.text.toString())
+            .subscribe({ result ->
+              addNewBubbleMessage(result.output, "Kleverbot", "You")
+            },
+                { error -> error.printStackTrace() }))
 
-      compositeDisposable.add(
-          ApiManager.talkToBot(messageET.text.toString())
-              .subscribe({ result ->
-                addMessage("result.output", "Kleverbot", "You")
-              },
-                  { error -> error.printStackTrace() }))
+    sendMessageBTN.setOnClickListener {
+      addNewBubbleMessage(messageET.text.toString(), "You", "Kleverbot")
+
+      sendMessageToBot(messageET.text.toString())
 
       messageET.setText("")
     }
   }
 
   fun setupMessagesRecycler() {
-    messagesAdapter = MessagesAdapter(messageBubbles,
+    messagesAdapter = MessagesAdapter(this, messageBubbles,
         {
           Toast.makeText(this, "Message timestamp is : ${it.timestamp}", Toast.LENGTH_LONG).show()
         })
@@ -55,7 +57,16 @@ class MainActivity : AppCompatActivity() {
     messagesRecycler.adapter = messagesAdapter
   }
 
-  fun addMessage(body: String, sender: String, recipient: String) {
+  fun sendMessageToBot(input: String) {
+    compositeDisposable.add(
+        ApiManager.talkToBot(input)
+            .subscribe({ result ->
+              addNewBubbleMessage(result.output, "Kleverbot", "You")
+            },
+                { error -> error.printStackTrace() }))
+  }
+
+  fun addNewBubbleMessage(body: String, sender: String, recipient: String) {
     messageBubbles.add(
         MessageBubble(body, Date().time.toString(), sender, recipient))
 
