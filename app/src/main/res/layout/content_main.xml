@@ -15,21 +15,27 @@
       android:layout_height="match_parent"
       >
 
-    <ScrollView
-        android:id="@+id/messagesScrollContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/messageET"
-        android:orientation="vertical"
-        >
+    <!--<ScrollView-->
+    <!--android:id="@+id/messagesScrollContainer"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_above="@+id/messageET"-->
+    <!--android:orientation="vertical"-->
+    <!--&gt;-->
 
-      <LinearLayout
-          android:id="@+id/messagesLayout"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          />
-    </ScrollView>
+    <!--<LinearLayout-->
+    <!--android:id="@+id/messagesLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical"-->
+    <!--/>-->
+    <!--</ScrollView>-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/messagesRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
     <EditText
         android:id="@+id/messageET"
