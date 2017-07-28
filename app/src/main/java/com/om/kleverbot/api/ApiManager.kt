@@ -1,5 +1,6 @@
 package com.om.kleverbot.api
 
+import com.om.kleverbot.BuildConfig
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -46,7 +47,8 @@ object ApiManager {
    * To avoid having to get API Service from this class as an instance and then do the call,
    * call it directly from here to be able to grab its output as a single unit and subscribe/observe wherever you like
    */
-  fun talkToBot(key: String, input: String): Observable<BotResponse> =
-      apiService.talkToBot(key, input).subscribeOn(Schedulers.io()).observeOn(
+  fun talkToBot(input: String): Observable<BotResponse> =
+      apiService.talkToBot(BuildConfig.CLEVERBOT_API_KEY, input).subscribeOn(
+          Schedulers.io()).observeOn(
           AndroidSchedulers.mainThread())
 }
