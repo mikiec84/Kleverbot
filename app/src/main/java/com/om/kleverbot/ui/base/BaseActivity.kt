@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import timber.log.Timber
 
 abstract class BaseActivity<in V : BaseView, T : BasePresenter<V>> : AppCompatActivity(), BaseView {
 
@@ -14,6 +15,7 @@ abstract class BaseActivity<in V : BaseView, T : BasePresenter<V>> : AppCompatAc
     super.onCreate(savedInstanceState)
     presenter.attachView(this as V)
     presenter.initialiseCompositeDisposable()
+    Timber.d("onCreate")
   }
 
   override fun getContext(): Context = this

@@ -1,6 +1,7 @@
 package com.om.kleverbot.ui.base
 
 import io.reactivex.disposables.CompositeDisposable
+import timber.log.Timber
 
 open class BasePresenterImpl<V : BaseView> : BasePresenter<V> {
 
@@ -9,6 +10,8 @@ open class BasePresenterImpl<V : BaseView> : BasePresenter<V> {
 
   override fun attachView(view: V) {
     this.view = view
+    Timber.d("attachView")
+
   }
 
   override fun detachView() {
@@ -17,6 +20,7 @@ open class BasePresenterImpl<V : BaseView> : BasePresenter<V> {
 
   override fun initialiseCompositeDisposable() {
     compositeDisposable = CompositeDisposable()
+    Timber.d("")
   }
 
   override fun clearCompositeDisposable() {

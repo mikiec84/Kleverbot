@@ -10,6 +10,7 @@ import com.om.kleverbot.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.message_layout.view.*
 import kotlinx.android.synthetic.main.toolbar.*
+import timber.log.Timber
 
 class MainActivity : BaseActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
 
@@ -22,6 +23,8 @@ class MainActivity : BaseActivity<MainContract.View, MainContract.Presenter>(), 
     setContentView(R.layout.activity_main)
 
     setSupportActionBar(toolbar)
+
+    Timber.d("onCreate")
 
     fab.setOnClickListener {
       addMessageToView(messageET.text.toString())
