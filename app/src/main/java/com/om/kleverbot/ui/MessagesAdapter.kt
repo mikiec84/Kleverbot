@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.om.kleverbot.R
 import com.om.kleverbot.classes.MessageBubble
 import kotlinx.android.synthetic.main.message_layout.view.*
-import timber.log.Timber
 
 class MessagesAdapter(private val messageBubbles: List<MessageBubble>,
     val onClick: (MessageBubble) -> Unit)
@@ -32,7 +31,6 @@ class MessagesAdapter(private val messageBubbles: List<MessageBubble>,
     fun bindData(messageBubble: MessageBubble) {
       with(messageBubble) {
         itemView.messageContentTV.text = body
-        Timber.d("The body was $body")
         itemView.setOnClickListener { onClick(this) }
       }
     }
