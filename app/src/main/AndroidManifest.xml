@@ -6,7 +6,7 @@
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
   <application
-      android:name=".KleverbotApplication"
+      android:name=".classes.KleverbotApplication"
       android:allowBackup="true"
       android:icon="@mipmap/ic_launcher"
       android:label="@string/app_name"
@@ -15,7 +15,7 @@
       android:theme="@style/AppTheme">
 
     <activity
-        android:name="com.om.kleverbot.ui.main.MainActivity"
+        android:name="com.om.kleverbot.ui.MainActivity"
         android:label="@string/app_name"
         android:theme="@style/AppTheme.NoActionBar"
         android:windowSoftInputMode="stateHidden|adjustResize">
