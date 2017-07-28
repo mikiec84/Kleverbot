@@ -11,6 +11,8 @@ import java.util.concurrent.TimeUnit
 object ApiManager {
   private const val SERVER: String = "https://www.cleverbot.com/"
 
+  const val GET_REPLY_ENDPOINT = "getreply"
+
   private lateinit var apiService: ApiService
 
   init {
