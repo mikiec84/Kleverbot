@@ -6,5 +6,5 @@
   <color name="gray">#B1BCBE</color>
 
   <color name="your_messages_bgcolor">#e1ffc7</color>
-  <color name="their_messages_bgcolor">#ffffff</color>
+  <color name="kleverbot_messages_bgcolor">#ffffff</color>
 </resources>

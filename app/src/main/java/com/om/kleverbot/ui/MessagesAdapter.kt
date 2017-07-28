@@ -1,51 +1,78 @@
 package com.om.kleverbot.ui
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import com.om.kleverbot.R
 import com.om.kleverbot.classes.MessageBubble
-import kotlinx.android.synthetic.main.message_layout.view.*
+import kotlinx.android.synthetic.main.kleverbot_message_layout.view.*
 
-
-class MessagesAdapter(val context: Context, private val messageBubbles: List<MessageBubble>,
+class MessagesAdapter(private val messageBubbles: List<MessageBubble>,
     val onClick: (MessageBubble) -> Unit)
-  : RecyclerView.Adapter<MessagesAdapter.ViewHolder>() {
+  : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-  override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-    holder?.bindData(messageBubbles[position])
-  }
+  private val YOUR_MESSAGE = 1
+  private val KLEVERBOT_MESSAGE = 2
 
   override fun getItemCount(): Int = messageBubbles.size
 
-  override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-    return LayoutInflater.from(parent?.context)
-        .inflate(R.layout.message_layout, parent, false).let {
-      ViewHolder(context, it, onClick)
+  override fun getItemViewType(position: Int): Int =
+      when (messageBubbles[position].sender) {
+        "You" -> {
+          YOUR_MESSAGE
+        }
+        "Kleverbot" -> {
+          KLEVERBOT_MESSAGE
+        }
+        else -> -1
+      }
+
+  override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    if (viewType == YOUR_MESSAGE) {
+      return LayoutInflater.from(parent?.context)
+          .inflate(R.layout.your_message_layout, parent, false).let {
+        YourMessagesViewHolder(it, onClick)
+      }
+    } else {
+      return LayoutInflater.from(parent?.context)
+          .inflate(R.layout.kleverbot_message_layout, parent, false).let {
+        KleverbotMessagesViewHolder(it, onClick)
+      }
     }
   }
 
-  class ViewHolder(val context: Context, itemView: View,
+  override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    when (holder.itemViewType) {
+      YOUR_MESSAGE -> {
+        val yourHolder = holder as YourMessagesViewHolder
+        yourHolder.bindData(messageBubbles[position])
+      }
+      KLEVERBOT_MESSAGE -> {
+        val kleverbotHolder = holder as KleverbotMessagesViewHolder
+        kleverbotHolder.bindData(messageBubbles[position])
+      }
+    }
+  }
+
+  class YourMessagesViewHolder(itemView: View,
       val onClick: (MessageBubble) -> Unit) : RecyclerView.ViewHolder(
       itemView) {
 
     fun bindData(messageBubble: MessageBubble) {
-      val params = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-          RelativeLayout.LayoutParams.WRAP_CONTENT)
-
-      params.setMargins(0, 0, 0,
-          context.resources.getDimensionPixelSize(R.dimen.bottom_padding_between_messages))
-      itemView.layoutParams = params
-
       with(messageBubble) {
-        if (sender == "You")
-          itemView.setBackgroundResource(R.drawable.your_messages_bg)
-        else
-          itemView.setBackgroundResource(R.drawable.their_messages_bg)
+        itemView.messageContentTV.text = body
+        itemView.setOnClickListener { onClick(this) }
+      }
+    }
+  }
 
+  class KleverbotMessagesViewHolder(itemView: View,
+      val onClick: (MessageBubble) -> Unit) : RecyclerView.ViewHolder(
+      itemView) {
+
+    fun bindData(messageBubble: MessageBubble) {
+      with(messageBubble) {
         itemView.messageContentTV.text = body
         itemView.setOnClickListener { onClick(this) }
       }
