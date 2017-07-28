@@ -2,8 +2,6 @@ package com.om.kleverbot.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.ScrollView
 import com.om.kleverbot.BuildConfig
@@ -42,21 +40,6 @@ class MainActivity : AppCompatActivity() {
 
       messageET.setText("")
     }
-  }
-
-  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menuInflater.inflate(R.menu.menu_main, menu)
-    return true
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    val id = item.itemId
-
-    if (id == R.id.action_settings) {
-      return true
-    }
-
-    return super.onOptionsItemSelected(item)
   }
 
   fun addMessageToView(message: String) {
