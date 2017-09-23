@@ -14,11 +14,11 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-  val compositeDisposable: CompositeDisposable by lazy {
+  private val compositeDisposable: CompositeDisposable by lazy {
     CompositeDisposable()
   }
 
-  val messageBubbles: ArrayList<MessageBubble> by lazy {
+  private val messageBubbles: ArrayList<MessageBubble> by lazy {
     ArrayList<MessageBubble>()
   }
 
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
-  fun setupMessagesRecycler() {
+  private fun setupMessagesRecycler() {
     messagesAdapter = MessagesAdapter(messageBubbles,
         {
           Toast.makeText(this, "Message timestamp is : ${it.timestamp}", Toast.LENGTH_LONG).show()
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     messagesRecycler.adapter = messagesAdapter
   }
 
-  fun addNewBubbleMessage(body: String, sender: String, recipient: String) {
+  private fun addNewBubbleMessage(body: String, sender: String, recipient: String) {
     messageBubbles.add(
         MessageBubble(body, Date().time.toString(), sender, recipient))
 
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     messagesRecycler.scrollToPosition(messageBubbles.size - 1)
   }
 
-  fun sendMessageToBot(input: String) {
+  private fun sendMessageToBot(input: String) {
     compositeDisposable.add(
         ApiManager.talkToBot(input)
             .subscribe({ result ->

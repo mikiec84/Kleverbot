@@ -11,8 +11,9 @@
       android:layout_height="wrap_content"
       android:layout_alignParentLeft="true"
       android:layout_alignParentStart="true"
-      android:layout_margin="20dp"
+      android:layout_margin="@dimen/chat_box_margin"
       android:background="@drawable/kleverbot_messages_bg"
+      android:padding="@dimen/chat_box_margin"
       android:textColor="@android:color/black"
       />
 </RelativeLayout>

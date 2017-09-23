@@ -13,14 +13,12 @@
   <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_marginBottom="15dp"
       >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/messagesRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/messageET"
         />
 
     <EditText
@@ -30,7 +28,8 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/chat_box_margin"
         android:background="@drawable/your_messages_bg"
-        android:hint="Type a message"
+        android:hint="@string/type_message_prompt"
+        android:padding="@dimen/chat_box_margin"
         />
 
     <android.support.design.widget.FloatingActionButton
@@ -40,10 +39,12 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/fab_margin_horizontal"
-        android:layout_marginEnd="@dimen/fab_margin_vertical"
-        android:layout_marginRight="@dimen/fab_margin_vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/send_message_btn_margin_bottom"
+        android:layout_marginEnd="@dimen/chat_box_margin"
+        android:layout_marginRight="@dimen/chat_box_margin"
         app:srcCompat="@android:drawable/ic_menu_send"
         />
+
   </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

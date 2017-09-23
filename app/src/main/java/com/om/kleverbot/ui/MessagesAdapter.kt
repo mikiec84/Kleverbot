@@ -9,7 +9,7 @@ import com.om.kleverbot.classes.MessageBubble
 import kotlinx.android.synthetic.main.kleverbot_message_layout.view.*
 
 class MessagesAdapter(private val messageBubbles: List<MessageBubble>,
-    val onClick: (MessageBubble) -> Unit)
+    private val onClick: (MessageBubble) -> Unit)
   : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
   private val YOUR_MESSAGE = 1
@@ -29,13 +29,13 @@ class MessagesAdapter(private val messageBubbles: List<MessageBubble>,
       }
 
   override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-    if (viewType == YOUR_MESSAGE) {
-      return LayoutInflater.from(parent?.context)
+    return if (viewType == YOUR_MESSAGE) {
+      LayoutInflater.from(parent?.context)
           .inflate(R.layout.your_message_layout, parent, false).let {
         YourMessagesViewHolder(it, onClick)
       }
     } else {
-      return LayoutInflater.from(parent?.context)
+      LayoutInflater.from(parent?.context)
           .inflate(R.layout.kleverbot_message_layout, parent, false).let {
         KleverbotMessagesViewHolder(it, onClick)
       }
@@ -56,7 +56,7 @@ class MessagesAdapter(private val messageBubbles: List<MessageBubble>,
   }
 
   class YourMessagesViewHolder(itemView: View,
-      val onClick: (MessageBubble) -> Unit) : RecyclerView.ViewHolder(
+      private val onClick: (MessageBubble) -> Unit) : RecyclerView.ViewHolder(
       itemView) {
 
     fun bindData(messageBubble: MessageBubble) {
@@ -68,7 +68,7 @@ class MessagesAdapter(private val messageBubbles: List<MessageBubble>,
   }
 
   class KleverbotMessagesViewHolder(itemView: View,
-      val onClick: (MessageBubble) -> Unit) : RecyclerView.ViewHolder(
+      private val onClick: (MessageBubble) -> Unit) : RecyclerView.ViewHolder(
       itemView) {
 
     fun bindData(messageBubble: MessageBubble) {
