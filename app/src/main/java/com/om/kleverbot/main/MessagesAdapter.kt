@@ -1,11 +1,11 @@
-package com.om.kleverbot.ui
+package com.om.kleverbot.main
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.om.kleverbot.R
-import com.om.kleverbot.classes.MessageBubble
+import com.om.kleverbot.model.MessageBubble
 import kotlinx.android.synthetic.main.kleverbot_message_layout.view.*
 
 class MessagesAdapter(private val messageBubbles: List<MessageBubble>,

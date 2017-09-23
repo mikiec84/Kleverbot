@@ -47,8 +47,8 @@ object ApiManager {
    * To avoid having to get API Service from this class as an instance and then do the call,
    * call it directly from here to be able to grab its output as a single unit and subscribe/observe wherever you like
    */
-  fun talkToBot(input: String): Observable<BotResponse> =
-      apiService.talkToBot(BuildConfig.CLEVERBOT_API_KEY, input).subscribeOn(
+  fun sendMessageToBot(input: String): Observable<BotResponse> =
+      apiService.sendMessageToBot(BuildConfig.CLEVERBOT_API_KEY, input).subscribeOn(
           Schedulers.io()).observeOn(
           AndroidSchedulers.mainThread())
 }

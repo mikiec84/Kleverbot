@@ -1,4 +1,4 @@
-package com.om.kleverbot.classes
+package com.om.kleverbot.model
 
 import android.app.Application
 import timber.log.Timber
